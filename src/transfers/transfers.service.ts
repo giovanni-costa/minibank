@@ -24,21 +24,19 @@ export class TransfersService {
       where:{id:data.receiver}
     })
 
-    // Throw Error if Adresses are Invalid
-    if(!senderData.id || !receiverData.id) {throw new Error('Invalid Address!')}
     // Throw Error if Funds are not enough
     if(senderData.amount.toNumber() < data.value || data.value <= 0) {throw new Error('Not enough funds!')}
 
     // Update funds for peers
     await this.prisma.miniBanco.update({
-      data: {amount: senderData.amount.toNumber() - data.value},
+      data: {amount: senderData.amount.toNumber() - parseFloat(data.value.toString())},
       where:{
         id : senderData.id
       }
     })
 
     await this.prisma.miniBanco.update({
-      data: {amount: receiverData.amount.toNumber() + data.value},
+      data: {amount: receiverData.amount.toNumber() + parseFloat(data.value.toString())},
       where:{
         id : receiverData.id
       }

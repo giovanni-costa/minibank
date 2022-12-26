@@ -3,5 +3,6 @@ export class CreateAdminDto {
     cpf: string
     password: string
     name: string
-    amount?: number 
+    amount?: number
+    role: string
 }

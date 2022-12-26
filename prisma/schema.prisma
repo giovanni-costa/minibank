@@ -14,10 +14,10 @@ model miniBanco {
 
   id String @id @default(uuid())
   cpf String @unique @db.VarChar(11)
-  password String @unique @db.VarChar(6)
+  password String @db.VarChar(60)
   name String
   amount Decimal @db.Money() @default(0)
-
+  role String @default("user")
 }
 
 model Transfers {

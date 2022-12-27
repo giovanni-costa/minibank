@@ -5,14 +5,14 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Roles } from 'src/auth/role/role.decorator';
 import { JwtGuard } from 'src/auth/jwt-guard';
 import { RoleGuard } from 'src/auth/role/role.guard';
+import { AuthGuard } from 'src/auth-guard';
 
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Roles(["admin"])
   @Post()
-  @UseGuards(JwtGuard, RoleGuard)
+  @UseGuards(AuthGuard)
   create(@Body() createAdminDto: CreateAdminDto) {
     return this.adminService.createCustomer(createAdminDto);
   }

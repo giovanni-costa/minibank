@@ -4,6 +4,7 @@ import { CreateTransferDto } from './dto/create-transfer.dto';
 import { JwtGuard } from 'src/auth/jwt-guard';
 import { Roles } from 'src/auth/role/role.decorator';
 import { RoleGuard } from 'src/auth/role/role.guard';
+import { Query } from '@nestjs/common/decorators';
 
 @Controller('transfers')
 export class TransfersController {
@@ -12,8 +13,8 @@ export class TransfersController {
   @Roles(["admin","user"]) // All Roles can Transfer
   @Post()
   @UseGuards(JwtGuard, RoleGuard)
-  create(@Body() data: CreateTransferDto) {
-    return this.transfersService.create(data);
+  create(@Body() data: CreateTransferDto, @Query('password') password: string) {
+    return this.transfersService.create(data, password);
   }
 
   @Roles(["admin"])

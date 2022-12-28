@@ -74,10 +74,21 @@ export class TransfersService {
     return await this.prisma.transfers.findMany();
   }
 
-  async findOne(id: string) {
-    return await this.prisma.miniBanco.findUniqueOrThrow({
+  async findLast(id: string) {
+
+    return await this.prisma.transfers.findMany({
+      take: 10,
       where:{
-        id : id
+        OR:[
+          {
+            sender:id
+          },{
+            receiver: id
+          }
+        ]
+      },
+      orderBy: {
+        date: 'desc'
       }
     })
   }

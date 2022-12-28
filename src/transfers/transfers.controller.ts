@@ -27,8 +27,8 @@ export class TransfersController {
   @Roles(["admin","user"]) // All Roles can check for a single Transfer
   @Get(':id')
   @UseGuards(JwtGuard, RoleGuard)
-  findOne(@Param('id') id: string) {
-    return this.transfersService.findOne(id);
+  findLast(@Param('id') id: string) {
+    return this.transfersService.findLast(id);
   }
 
 /*   @Patch(':id')

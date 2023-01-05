@@ -1,7 +1,9 @@
 export class CreateTransferDto {
-    id?: string
-    sender: string
-    receiver: string
-    value: number
-    date?: Date
+  id?: string;
+  sender: string;
+  senderName: string;
+  receiver: string;
+  receiverName: string;
+  value: number;
+  date?: Date;
 }

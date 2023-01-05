@@ -14,7 +14,7 @@ model miniBanco {
 
   id String @id @default(uuid())
   cpf String @unique @db.VarChar(11)
-  password String @db.VarChar(60)
+  password String @db.VarChar(100)
   name String
   amount Decimal @db.Money() @default(0)
   role String @default("user")
@@ -23,7 +23,9 @@ model miniBanco {
 model Transfers {
   id String @id @default(uuid())
   sender String
+  senderName String
   receiver String
+  receiverName String
   value Decimal @db.Money() @default(0)
   date DateTime @default(now())
 }
